@@ -8,7 +8,7 @@ class Playlist:
     def __init__(self):
         self.head = None
 
-    # Add at end
+    
     def append(self, name):
         new = Node(name)
         if self.head is None:
@@ -19,13 +19,13 @@ class Playlist:
             temp = temp.next
         temp.next = new
 
-    # Add at beginning
+
     def prepend(self, name):
         new = Node(name)
         new.next = self.head
         self.head = new
 
-    # Insert at position
+    
     def insert(self, name, position):
         new = Node(name)
 
@@ -47,7 +47,6 @@ class Playlist:
         new.next = temp.next
         temp.next = new
 
-    # Delete by song name
     def delete(self, name):
         if self.head is None:
             return
@@ -63,7 +62,7 @@ class Playlist:
                 return
             temp = temp.next
 
-    # Display playlist
+
     def show(self):
         temp = self.head
         while temp:
