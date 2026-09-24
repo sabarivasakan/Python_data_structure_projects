@@ -6,6 +6,9 @@ class Node:
         self.height = 0
 
 class AVLTree:
+    def __init__(self):
+        self.size = 0
+
     def height(self, node):
         if node is None:
             return -1
@@ -50,7 +53,7 @@ class AVLTree:
             root.right = self.insert(root.right, key)
         else:
             return root  
-            
+
         root.height = 1 + max(self.height(root.left), self.height(root.right))
         balance = self.get_balance(root)
 
@@ -112,8 +115,10 @@ class AVLTree:
         root.height = 1 + max(self.height(root.left), self.height(root.right))
         balance = self.get_balance(root)
 
+
         if balance > 1 and self.get_balance(root.left) >= 0:
             return self.right_rotate(root)
+
 
         if balance > 1 and self.get_balance(root.left) < 0:
             root.left = self.left_rotate(root.left)
@@ -132,12 +137,15 @@ class AVLTree:
         if root:
             self.inorder(root.left)
             print(root.key, end=" ")
+            self.size += 1
             self.inorder(root.right)
 
+
+# Execution
 tree = AVLTree()
 root = None
 
-n = int(input("Enter no.of elements : "))
+n = int(input("Enter no. of elements : "))
 for i in range(n):
     element = input("Enter value (e.g., 25ucs114): ").strip()
     root = tree.insert(root, element)
@@ -145,9 +153,8 @@ for i in range(n):
 print("\nInorder Traversal after insertion: ")
 tree.inorder(root)
 print()
-
+print("Tree size : ",tree.size)
 search_key = input("\nEnter a value to search: ").strip()
-
 result = tree.search(root, search_key)
 if result:
     print(f"Element {search_key} found in the tree!")
@@ -157,6 +164,9 @@ else:
 delete_key = input("\nEnter a value to delete: ").strip()
 root = tree.delete(root, delete_key)
 
+tree.size = 0
 print("Inorder Traversal after deletion: ")
 tree.inorder(root)
 print()
+print("Total height : ", tree.height(root))
+print("Total nodes  : ", tree.size)
